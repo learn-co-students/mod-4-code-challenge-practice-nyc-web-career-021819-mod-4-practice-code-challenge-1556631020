@@ -9,7 +9,7 @@ class App extends Component {
 
   state = {
     sushis: [],
-    cashRemaining: 120,
+    cashRemaining: 30,
     index: 0,
     eatenSushiIds:[],
     tooLittleMoneyAlert: false
@@ -38,12 +38,14 @@ class App extends Component {
     .then(res => this.setState({sushis: res}))
   }
 
+  addMoney = (num) => {this.setState({cashRemaining: this.state.cashRemaining + parseInt(num)})}
+
   render() {
     return (
       <div className="app">
 
         <SushiContainer sushis={this.state.sushis} eatenSushiIds={this.state.eatenSushiIds} index={this.state.index} eatASushi={this.eatASushi} moreSushi={this.moreSushi}/>
-        <Table cashRemaining={this.state.cashRemaining} tooLittleMoneyAlert={this.state.tooLittleMoneyAlert} eatenSushiIds={this.state.eatenSushiIds}/>
+        <Table cashRemaining={this.state.cashRemaining} addMoney={this.addMoney} tooLittleMoneyAlert={this.state.tooLittleMoneyAlert} eatenSushiIds={this.state.eatenSushiIds}/>
       </div>
     );
   }

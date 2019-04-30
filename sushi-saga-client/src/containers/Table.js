@@ -1,4 +1,6 @@
 import React, { Fragment } from 'react'
+import AddMoneyForm from '../components/AddMoneyForm'
+
 
 const Table = (props) => {
 
@@ -14,6 +16,7 @@ const Table = (props) => {
         You have: ${ props.cashRemaining } remaining!
         <p>
         {props.tooLittleMoneyAlert && "You don't have enough money!"}
+        <AddMoneyForm addMoney={props.addMoney}/>
         </p>
       </h1>
       <div className="table">
