@@ -1,9 +1,16 @@
-import React from 'react'
+import React from 'react';
 
 const MoreButton = (props) => {
-    return <button onClick={/* Fill me in! */ null}>
-            More sushi!
-          </button>
-}
+	const handleClick = (e) => {
+		console.log(e.target);
+		// nextRound();
+	};
 
-export default MoreButton
+	return (
+		<button onClick={handleClick} nextRound={props.nextRound}>
+			More sushi!
+		</button>
+	);
+};
+
+export default MoreButton;
