@@ -9,7 +9,7 @@ class App extends Component {
 
   state = {
     sushis: [],
-    cashRemaining: 30,
+    cashRemaining: 50,
     index: 0,
     eatenSushiIds:[],
     tooLittleMoneyAlert: false

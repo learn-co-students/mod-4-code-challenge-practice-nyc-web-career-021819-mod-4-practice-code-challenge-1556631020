@@ -1,8 +1,6 @@
 import React, { Fragment } from 'react'
 
 const Sushi = (props) => {
-  console.log(props)
-  console.log("sushi included",props.eatenSushiIds.includes(props.id))
   return (
     <div className="sushi">
       <div className="plate"

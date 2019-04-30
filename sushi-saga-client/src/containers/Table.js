@@ -4,7 +4,6 @@ import AddMoneyForm from '../components/AddMoneyForm'
 
 const Table = (props) => {
 
-
   const renderPlates = (array) => {
     return array.map((x, index) => {
       return <div className="empty-plate" style={{ top: -7 * index }}/>
@@ -21,16 +20,7 @@ const Table = (props) => {
       </h1>
       <div className="table">
         <div className="stack">
-          {
-            /*
-               renderPlates takes an array
-               and renders an empty plate
-               for every element in the array
-
-               Nicky note: This is going to have to take a variable "plates eaten"
-            */
-            renderPlates(props.eatenSushiIds)
-          }
+          {renderPlates(props.eatenSushiIds)}
         </div>
       </div>
     </Fragment>
