@@ -21,7 +21,7 @@ class App extends Component {
 
   eatSushi = (e) => {
     let sushi = this.state.uneatenSushi.find(sushi => sushi.id === parseInt(e.target.id))
-    if (this.state.budget - sushi.price > 0) {
+    if (this.state.budget - sushi.price >= 0) {
       this.setState({
         eatenSushi: [...this.state.eatenSushi, sushi],
         budget: this.state.budget - sushi.price
