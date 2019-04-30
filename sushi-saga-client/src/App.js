@@ -7,10 +7,28 @@ const API = "http://localhost:3000/sushis"
 
 class App extends Component {
 
+  state = {
+    uneatenSushi: [],
+    eatenSushi: []
+  }
+
+  componentDidMount() {
+    fetch(API)
+      .then(res => res.json())
+      .then(data => this.setState({ uneatenSushi: data }) )
+  }
+
+  eatSushi = (e) => {
+    let sushi = this.state.uneatenSushi.find(sushi => sushi.id === parseInt(e.target.id))
+    this.setState({
+      eatenSushi: [...this.state.eatenSushi, sushi]
+    })
+  }
+
   render() {
     return (
       <div className="app">
-        <SushiContainer  />
+        <SushiContainer eatSushi={this.eatSushi} uneatenSushi={this.state.uneatenSushi} eatenSushi={this.state.eatenSushi} />
         <Table />
       </div>
     );
