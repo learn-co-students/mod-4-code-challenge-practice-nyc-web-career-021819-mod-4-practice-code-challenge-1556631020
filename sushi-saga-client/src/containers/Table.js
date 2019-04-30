@@ -1,32 +1,27 @@
-import React, { Fragment } from 'react'
+import React, { Component, Fragment } from 'react'
 
-const Table = (props) => {
+class Table extends Component {
 
-  const renderPlates = (array) => {
+  renderPlates = (array) => {
     return array.map((x, index) => {
       return <div className="empty-plate" style={{ top: -7 * index }}/>
     })
   }
 
-  return (
-    <Fragment>
-      <h1 className="remaining">
-        You have: ${ /* Give me how much money I have left */ } remaining!
-      </h1>
-      <div className="table">
-        <div className="stack">
-          {
-            /* 
-               renderPlates takes an array 
-               and renders an empty plate
-               for every element in the array
-            */
-            renderPlates([])
-          }
+  render() {
+    return (
+      <React.Fragment>
+        <h1 className="remaining">
+          You have: ${this.props.budget} remaining!
+        </h1>
+        <div className="table">
+          <div className="stack">
+            {this.renderPlates(this.props.eatenSushi)}
+          </div>
         </div>
-      </div>
-    </Fragment>
-  )
+      </React.Fragment>
+    )
+  }
 }
 
 export default Table
