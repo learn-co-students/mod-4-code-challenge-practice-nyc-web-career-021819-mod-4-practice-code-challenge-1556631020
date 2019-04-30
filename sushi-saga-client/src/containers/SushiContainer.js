@@ -12,11 +12,11 @@ const SushiContainer = (props) => {
   return (
     <Fragment>
       <div className="belt">
-          <Sushi sushiId={props.lastSushiId} sushis={props.sushis}/>
-          <Sushi sushiId={props.lastSushiId + 1} sushis={props.sushis}/>
-          <Sushi sushiId={props.lastSushiId + 2} sushis={props.sushis}/>
-          <Sushi sushiId={props.lastSushiId + 3} sushis={props.sushis}/>
-        <MoreButton onClick={props.addMoreSushi} sushis={props.sushis}/>
+          <Sushi sushiId={props.lastSushiId} sushis={props.sushis} eatSushi={props.eatSushi}/>
+          <Sushi sushiId={props.lastSushiId + 1} sushis={props.sushis} eatSushi={props.eatSushi}/>
+          <Sushi sushiId={props.lastSushiId + 2} sushis={props.sushis} eatSushi={props.eatSushi}/>
+          <Sushi sushiId={props.lastSushiId + 3} sushis={props.sushis} eatSushi={props.eatSushi}/>
+        <MoreButton onClick={props.addMoreSushi} sushis={props.sushis} />
       </div>
     </Fragment>
   )

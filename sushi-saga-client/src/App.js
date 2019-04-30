@@ -120,12 +120,40 @@ class App extends Component {
       "price": 10,
       "created_at": "2018-07-27T18:53:16.292Z"
     }],
-    lastSushiId: 1
+    lastSushiId: 1,
+    currentSushis: [{
+      "id": 1,
+      "name": "Tako Supreme",
+      "img_url": "https://sushistickers.com/img/sushi-slice_99.png",
+      "price": 20,
+      "created_at": "2018-07-27T18:53:16.241Z"
+    },
+    {
+      "id": 2,
+      "name": "Tsundere Ebi",
+      "img_url": "https://sushistickers.com/img/sushi-slice_75.png",
+      "price": 15,
+      "created_at": "2018-07-27T18:53:16.244Z"
+    },{
+      "id": 3,
+      "name": "Oh Sake",
+      "img_url": "https://sushistickers.com/img/sushi-slice_29.png",
+      "price": 10,
+      "created_at": "2018-07-27T18:53:16.248Z"
+    },
+    {
+      "id": 4,
+      "name": "Genki Toro",
+      "img_url": "https://lh3.googleusercontent.com/-PjRMCz4UOeE/VoWCHXGDi7I/AAAAAAAAAH0/jRL-o0KdB_U/w842-h596/maralbarismos_sushi_cute-01.png",
+      "price": 25,
+      "created_at": "2018-07-27T18:53:16.251Z"
+    }],
+    remainingMoney: 100
   }
 
   addMoreSushi = () => {
-    console.log("prevProps")
-    this.setState(prevProps => ({lastSushi: prevProps + 4}, console.log("new state", this.state.lastSushi)))
+    console.log("prevState")
+    this.setState(prevState => ({lastSushi: prevState + 4}, console.log("new state", this.state.lastSushi)))
   }
 
   componentDidMount() {
@@ -134,13 +162,32 @@ class App extends Component {
       const resp = await fetch(API)
       const sushisFromApi = await resp.json()
       // this.setState({sushis: [...this.state.sushis, sushisFromApi]}, console.log("state:", this.state.sushis))
+      let currentSushis = await this.addEaten()
+      this.setState({currentSushis: [...this.state.currentSushis, currentSushis]}, console.log("current", this.state.currentSushis))
     })();
+    // Add state of eaten to all sushis and set to false
+  }
+
+  addEaten = () => {
+    return this.state.sushis.map(sushi => {
+      return {...sushi, eaten: false}
+    })
+  }
+
+  eatSushi = (sushiId) => {
+    // Find the sushi to be eaten
+    // set state of sushi with that id to eaten true
+    // Find index of sushi with that id
+    const index = this.state.currentSushis.findIndex(sushi => sushi.id === sushiId)
+    const sushiToUpdate = this.state.currentSushis.find(sushi => sushi.id === sushiId)
+    this.setState({currentSushis: [[...currentSushis].splice(0, index), {...sushiToUpdate, eaten: true}, [...currentSushis].splice(index + 1)]})
+    this.setState(prevState => ({remainingMoney: prevState - sushiToUpdate.price})
   }
 
   render() {
     return (
       <div className="app">
-        <SushiContainer sushis={this.state.sushis} lastSushiId={this.state.lastSushiId} addMoreSushi={this.state.addMoreSushi}  />
+        <SushiContainer sushis={this.state.currentSushis} lastSushiId={this.state.lastSushiId} addMoreSushi={this.state.addMoreSushi} eatSushi={this.eatSushi} />
         <Table />
       </div>
     );
